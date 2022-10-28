@@ -2,7 +2,10 @@ package ru.job4j.iterator;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.NoSuchElementException;
+
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ArrayItTest {
     @Test
@@ -23,5 +26,14 @@ class ArrayItTest {
         assertThat(it.next()).isEqualTo(1);
         assertThat(it.next()).isEqualTo(2);
         assertThat(it.next()).isEqualTo(3);
+    }
+
+    @Test
+    public void whenNextFromEmpty() {
+        ArrayIt it = new ArrayIt(
+                new int[] {}
+        );
+        assertThatThrownBy(it::next)
+                .isInstanceOf(NoSuchElementException.class);
     }
 }
