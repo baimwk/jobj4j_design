@@ -73,8 +73,8 @@ public class SimpleArrayList<T> implements SimpleList<T> {
     }
 
     private void doubleArrayLength() {
-        container = container.length > 0 ?
-                Arrays.copyOf(container, container.length * 2)
+        container = container.length > 0
+                ? Arrays.copyOf(container, container.length * 2)
                 : Arrays.copyOf(container, container.length + 1);
     }
 }
