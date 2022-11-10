@@ -22,16 +22,14 @@ public class SimpleArrayList<T> implements SimpleList<T> {
 
     @Override
     public T set(int index, T newValue) {
-        Objects.checkIndex(index, size);
-        T previous = container[index];
+        T previous = get(index);
         container[index] = newValue;
         return previous;
     }
 
     @Override
     public T remove(int index) {
-        Objects.checkIndex(index, size);
-        T removed = container[index];
+        T removed = get(index);
         System.arraycopy(container, index + 1, container, index, container.length - index - 1);
         container[--size] = null;
         modCount++;
@@ -75,6 +73,8 @@ public class SimpleArrayList<T> implements SimpleList<T> {
     }
 
     private void doubleArrayLength() {
-        container = Arrays.copyOf(container, container.length * 2);
+        container = container.length > 0 ?
+                Arrays.copyOf(container, container.length * 2)
+                : Arrays.copyOf(container, container.length + 1);
     }
 }
