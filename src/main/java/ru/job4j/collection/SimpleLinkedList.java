@@ -30,7 +30,11 @@ public class SimpleLinkedList<E> implements LinkedList<E> {
     @Override
     public E get(int index) {
         Objects.checkIndex(index, size);
-        return node(index).item;
+        Node<E> x = last;
+        for (int i = 0; i < index; i++) {
+            x = x.prev;
+        }
+        return x.item;
     }
 
     @Override
@@ -67,13 +71,5 @@ public class SimpleLinkedList<E> implements LinkedList<E> {
             this.item = element;
             this.prev = prev;
         }
-    }
-
-    private Node<E> node(int index) {
-        Node<E> x = last;
-        for (int i = 0; i < index; i++) {
-            x = x.prev;
-        }
-        return x;
     }
 }
